@@ -1,0 +1,93 @@
+<!doctype html>
+
+<html>
+	<head>
+		<style>
+		.doubleslider-container {
+			float: left;
+			position: relative;
+			width: 50%;
+			height: 22px;
+		}
+		
+		.dslider {
+			position: absolute;
+			-webkit-appearance: none;
+			width: 99%;
+		}
+		
+		.dslider::-webkit-slider-thumb {
+			position: relative;
+			z-index: 20;
+		}
+		
+		.slidertext {
+			float: left;
+			width: 18px;
+		}
+		
+		#reset {
+			float: left;
+			margin-left: 5px;
+		}
+		
+		.slidewrap {
+			padding: 5px;
+		}
+		
+		.slidewrap:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		</style>
+	</head>
+	
+	<body>
+		<div class="slidewrap">
+			<input type="text" id="textmin" class="slidertext" value="1" oninput=textinput() onblur=slideinput()>
+			<div class="doubleslider-container">
+					<input type="range" id="slide1" class="dslider" min="1" max="41" value="1" oninput=slideinput()>
+					<input type="range" id="slide2" class="dslider" min="1" max="41" value="41" oninput=slideinput()>
+			</div>
+			<input type="text" id="textmax" class="slidertext" value="41" oninput=textinput() onblur=slideinput()>
+			<button id="reset" onclick=resetRange()>Reset Range</button> 
+
+			<script>
+				var slide1 = document.getElementById("slide1");
+				var slide2 = document.getElementById("slide2");
+				var textmin = document.getElementById("textmin");
+				var textmax = document.getElementById("textmax");
+				
+				function slideinput() {
+					if (Number(slide1.value) <= Number(slide2.value)) {
+						textmin.value = slide1.value;
+						textmax.value = slide2.value;
+					} else {
+						textmin.value = slide2.value;
+						textmax.value = slide1.value;
+					}
+				}
+				
+				function textinput() {
+					if (Number(textmin.value) <= Number(textmax.value)) {
+						if (Number(slide1.value) <= Number(slide2.value)) {
+							slide1.value = textmin.value;
+							slide2.value = textmax.value;
+						} else {
+							slide1.value = textmax.value;
+							slide2.value = textmin.value;
+						}
+					}
+				}
+				
+				function resetRange() {
+					textmin.value = 1;
+					textmax.value = 41;
+					slide1.value = 1;
+					slide2.value = 41;
+				}
+			</script>
+		</div>
+	</body>
+</html>

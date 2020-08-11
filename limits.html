@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html>
+	<head>
+	</head>
+	<body>
+		<div class ="slidewrap">
+			<input type="text" id="textmin" class="slidertext" value="1" oninput=textminin()>
+			<div class="doubleslider-container">
+				<input type="range" id="slidemin" class="dslider" min="1" max="41" value="1" oninput=slideminin()>
+				<input type="range" id="slidemax" class="dslider" min="1" max="41" value="41" oninput=slidemaxin()>
+			</div>
+			<input type="text" id="textmax" class="slidertext" value="41" oninput=textmaxin()>
+			<script>
+				var slidemin = document.getElementById("slidemin");
+				var slidemax = document.getElementById("slidemax");
+				var textmin = document.getElementById("textmin");
+				var textmax = document.getElementById("textmax");
+				
+				function slideminin() {
+					textmin.value = slidemin.value;
+					slidemax.min = slidemin.value;
+				}
+				
+				function slidemaxin() {
+					textmax.value = slidemax.value;
+					slidemin.max = slidemax.value;
+				}
+				
+				function textminin() {
+					if ((Number(textmin.value) <= Number(textmax.value)) && (Number(textmin.value) >= Number(slidemin.min))) {
+						slidemin.value = textmin.value;
+						slidemax.min = slidemin.value;
+					}
+				}
+				
+				function textmaxin() {
+					if ((Number(textmax.value) >= Number(textmin.value)) && (Number(textmax.value) <= Number(slidemax.max))) {
+						slidemax.value = textmax.value;
+						slidemin.max = slidemax.value;
+					}
+				}
+			</script>
+		</div>
+	</body>
+</html>
